@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="A modern single-page GitHub practice project.">
-    <meta name="author" content="Your Name">
+    <meta name="author" content="YOUR NAME">
+    <meta name="description" content="A personal collection of things I find interesting.">
 
-    <title>DevForge — GitHub Practice Project</title>
+    <title>YOUR NAME — Collection</title>
 
     <style>
-        /* ================================
-           RESET & GLOBAL STYLES
-        ================================= */
+        /* =====================================================
+           RESET
+        ===================================================== */
 
         * {
             margin: 0;
@@ -25,18 +25,15 @@
         }
 
         body {
+            background: #f5f4ef;
+            color: #171717;
+
             font-family:
-                Inter,
-                ui-sans-serif,
-                system-ui,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
+                Arial,
+                Helvetica,
                 sans-serif;
 
-            background: #080b12;
-            color: #f4f7fb;
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
         a {
@@ -45,912 +42,825 @@
         }
 
         img {
-            max-width: 100%;
+            width: 100%;
             display: block;
         }
 
-        .container {
-            width: min(1120px, 92%);
-            margin: auto;
-        }
 
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
 
-        /* ================================
-           NAVBAR
-        ================================= */
-
-        header {
-            position: sticky;
+        .nav {
+            position: fixed;
             top: 0;
-            z-index: 1000;
+            left: 0;
 
-            background: rgba(8, 11, 18, 0.78);
-            backdrop-filter: blur(14px);
+            width: 100%;
 
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-        }
-
-        nav {
-            min-height: 72px;
+            padding: 22px 30px;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
+
+            z-index: 100;
+
+            pointer-events: none;
         }
 
-        .logo {
+        .nav > * {
+            pointer-events: auto;
+        }
+
+        .name {
+            font-size: 15px;
+            font-weight: 600;
+
+            letter-spacing: -0.02em;
+        }
+
+        .nav-right {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 22px;
 
-            font-size: 1.25rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            font-size: 13px;
         }
 
-        .logo-mark {
-            width: 36px;
-            height: 36px;
+        .nav-right a {
+            opacity: 0.55;
 
-            display: grid;
-            place-items: center;
-
-            border-radius: 10px;
-
-            background: linear-gradient(
-                135deg,
-                #7c3aed,
-                #06b6d4
-            );
-
-            box-shadow:
-                0 0 25px rgba(124, 58, 237, 0.35);
+            transition: opacity 0.2s ease;
         }
 
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 28px;
-
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #9ca8ba;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: #ffffff;
+        .nav-right a:hover {
+            opacity: 1;
         }
 
 
-        /* ================================
+        /* =====================================================
            HERO
-        ================================= */
+        ===================================================== */
 
         .hero {
-            min-height: calc(100vh - 72px);
+            min-height: 90vh;
+
+            padding:
+                150px
+                6vw
+                100px;
+
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .hero-inner {
+            max-width: 720px;
+        }
+
+        .eyebrow {
+            margin-bottom: 25px;
+
+            color: #77756f;
+
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+        }
+
+        .hero h1 {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(55px, 9vw, 130px);
+
+            font-weight: 400;
+            line-height: 0.88;
+
+            letter-spacing: -0.065em;
+        }
+
+        .hero h1 em {
+            color: #77756f;
+            font-style: italic;
+        }
+
+        .intro {
+            max-width: 460px;
+
+            margin-top: 40px;
+
+            font-size: 16px;
+            line-height: 1.5;
+
+            color: #5d5b56;
+        }
+
+
+        /* =====================================================
+           COLLECTION HEADER
+        ===================================================== */
+
+        .collection-header {
+            padding: 0 30px 35px;
+
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+
+            border-bottom: 1px solid #d9d7d0;
+        }
+
+        .collection-title {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 30px;
+            font-weight: 400;
+
+            letter-spacing: -0.04em;
+        }
+
+        .collection-count {
+            color: #77756f;
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           MASONRY COLLECTION
+        ===================================================== */
+
+        .collection {
+            padding: 50px 30px 120px;
+
+            columns: 4 240px;
+            column-gap: 18px;
+        }
+
+        .item {
+            break-inside: avoid;
+
+            margin-bottom: 18px;
+
+            position: relative;
+
+            cursor: pointer;
+        }
+
+        .item img {
+            transition:
+                filter 0.35s ease,
+                transform 0.35s ease;
+        }
+
+        .item:hover img {
+            filter: brightness(0.88);
+            transform: scale(0.985);
+        }
+
+        .item-info {
+            padding: 9px 2px 16px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+
+            font-size: 11px;
+
+            color: #77756f;
+        }
+
+        .item-name {
+            color: #252525;
+        }
+
+
+        /* =====================================================
+           DIFFERENT IMAGE RATIOS
+        ===================================================== */
+
+        .portrait img {
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+        }
+
+        .landscape img {
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .square img {
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+        }
+
+        .wide img {
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+
+
+        /* =====================================================
+           ABOUT
+        ===================================================== */
+
+        .about {
+            min-height: 80vh;
+
+            padding: 120px 8vw;
+
+            background: #191918;
+            color: #f3f1eb;
 
             display: grid;
-            place-items: center;
+            grid-template-columns: 1fr 1fr;
+            gap: 10vw;
 
-            position: relative;
-            overflow: hidden;
-
-            padding: 90px 0;
-        }
-
-        .hero::before {
-            content: "";
-
-            position: absolute;
-            width: 600px;
-            height: 600px;
-
-            background: #6d28d9;
-            opacity: 0.15;
-
-            filter: blur(140px);
-            border-radius: 50%;
-
-            top: -250px;
-            left: -150px;
-        }
-
-        .hero::after {
-            content: "";
-
-            position: absolute;
-            width: 500px;
-            height: 500px;
-
-            background: #0891b2;
-            opacity: 0.12;
-
-            filter: blur(130px);
-            border-radius: 50%;
-
-            right: -180px;
-            bottom: -150px;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-
-            text-align: center;
-            max-width: 850px;
-        }
-
-        .badge {
-            display: inline-flex;
             align-items: center;
-            gap: 8px;
-
-            padding: 7px 14px;
-            margin-bottom: 24px;
-
-            border: 1px solid rgba(139,92,246,0.35);
-            border-radius: 999px;
-
-            background: rgba(124,58,237,0.08);
-
-            color: #c4b5fd;
-            font-size: 0.85rem;
         }
 
-        .status-dot {
-            width: 7px;
-            height: 7px;
+        .about-label {
+            color: #92908a;
 
-            border-radius: 50%;
-            background: #22c55e;
-
-            box-shadow: 0 0 12px #22c55e;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
         }
 
-        h1 {
-            font-size: clamp(3rem, 8vw, 6.5rem);
+        .about h2 {
+            margin-top: 20px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(45px, 6vw, 80px);
+
+            font-weight: 400;
             line-height: 0.95;
 
-            letter-spacing: -5px;
-            font-weight: 900;
-
-            margin-bottom: 28px;
+            letter-spacing: -0.055em;
         }
 
-        .gradient-text {
-            background:
-                linear-gradient(
-                    90deg,
-                    #a78bfa,
-                    #22d3ee,
-                    #818cf8
-                );
+        .about-text {
+            max-width: 450px;
 
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #aaa8a1;
+
+            font-size: 15px;
+            line-height: 1.7;
         }
 
-        .hero-description {
-            max-width: 650px;
-            margin: auto;
-
-            color: #9ca8ba;
-            font-size: 1.1rem;
-        }
-
-        .hero-buttons {
+        .about-links {
             margin-top: 35px;
 
             display: flex;
-            justify-content: center;
-            gap: 14px;
-
             flex-wrap: wrap;
+            gap: 12px;
         }
 
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .about-links a {
+            padding-bottom: 4px;
 
-            padding: 13px 22px;
+            border-bottom: 1px solid #66645f;
 
-            border-radius: 10px;
-
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 13px;
 
             transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.2s ease;
+                color 0.2s ease,
+                border-color 0.2s ease;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-primary {
+        .about-links a:hover {
             color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #7c3aed,
-                    #4f46e5
-                );
-
-            box-shadow:
-                0 10px 35px rgba(124,58,237,0.25);
-        }
-
-        .btn-primary:hover {
-            box-shadow:
-                0 15px 45px rgba(124,58,237,0.4);
-        }
-
-        .btn-secondary {
-            border: 1px solid #273244;
-            background: #101622;
-            color: #dbe3ef;
-        }
-
-        .btn-secondary:hover {
-            background: #151d2c;
+            border-color: white;
         }
 
 
-        /* ================================
-           SECTION
-        ================================= */
-
-        section {
-            padding: 100px 0;
-        }
-
-        .section-heading {
-            text-align: center;
-            margin-bottom: 55px;
-        }
-
-        .section-heading span {
-            color: #8b5cf6;
-            font-size: 0.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .section-heading h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-top: 8px;
-
-            letter-spacing: -1.5px;
-        }
-
-        .section-heading p {
-            max-width: 600px;
-            margin: 12px auto 0;
-
-            color: #8f9bad;
-        }
-
-
-        /* ================================
-           FEATURE CARDS
-        ================================= */
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            padding: 30px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(255,255,255,0.055),
-                    rgba(255,255,255,0.018)
-                );
-
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 18px;
-
-            transition:
-                transform 0.25s ease,
-                border-color 0.25s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(139,92,246,0.45);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 12px;
-
-            margin-bottom: 20px;
-
-            background: rgba(124,58,237,0.12);
-            color: #a78bfa;
-
-            font-size: 1.3rem;
-        }
-
-        .card h3 {
-            margin-bottom: 10px;
-            font-size: 1.15rem;
-        }
-
-        .card p {
-            color: #8995a8;
-            font-size: 0.95rem;
-        }
-
-
-        /* ================================
-           PROJECT TERMINAL
-        ================================= */
-
-        .terminal-section {
-            padding-top: 40px;
-        }
-
-        .terminal {
-            max-width: 850px;
-            margin: auto;
-
-            overflow: hidden;
-
-            border: 1px solid #273244;
-            border-radius: 15px;
-
-            background: #0d121c;
-
-            box-shadow:
-                0 30px 80px rgba(0,0,0,0.35);
-        }
-
-        .terminal-bar {
-            height: 44px;
-
-            display: flex;
-            align-items: center;
-
-            padding: 0 15px;
-
-            background: #131a26;
-            border-bottom: 1px solid #273244;
-        }
-
-        .terminal-dots {
-            display: flex;
-            gap: 7px;
-        }
-
-        .terminal-dots span {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-        }
-
-        .red { background: #ef4444; }
-        .yellow { background: #eab308; }
-        .green { background: #22c55e; }
-
-        .terminal-title {
-            margin-left: auto;
-            margin-right: auto;
-
-            color: #64748b;
-            font-size: 0.8rem;
-        }
-
-        pre {
-            padding: 30px;
-
-            overflow-x: auto;
-
-            color: #b9c5d5;
-            font-family:
-                "SFMono-Regular",
-                Consolas,
-                "Liberation Mono",
-                monospace;
-
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-
-        .command {
-            color: #22d3ee;
-        }
-
-        .comment {
-            color: #64748b;
-        }
-
-        .success {
-            color: #4ade80;
-        }
-
-
-        /* ================================
-           GIT WORKFLOW
-        ================================= */
-
-        .workflow {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
-
-        .step {
-            position: relative;
-
-            padding: 25px;
-
-            border: 1px solid #202b3c;
-            border-radius: 15px;
-
-            background: #0d121c;
-        }
-
-        .step-number {
-            color: #8b5cf6;
-            font-size: 0.75rem;
-            font-weight: 800;
-
-            margin-bottom: 12px;
-        }
-
-        .step h3 {
-            font-size: 1rem;
-            margin-bottom: 7px;
-        }
-
-        .step p {
-            color: #7f8b9d;
-            font-size: 0.85rem;
-        }
-
-
-        /* ================================
-           CTA
-        ================================= */
-
-        .cta {
-            text-align: center;
-
-            padding: 80px 30px;
-
-            border: 1px solid rgba(139,92,246,0.2);
-            border-radius: 24px;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(124,58,237,0.13),
-                    transparent 65%
-                );
-        }
-
-        .cta h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            letter-spacing: -2px;
-        }
-
-        .cta p {
-            max-width: 550px;
-            margin: 15px auto 28px;
-
-            color: #8f9bad;
-        }
-
-
-        /* ================================
+        /* =====================================================
            FOOTER
-        ================================= */
+        ===================================================== */
 
         footer {
-            padding: 35px 0;
+            padding: 25px 30px;
 
-            border-top: 1px solid rgba(255,255,255,0.07);
+            background: #191918;
+            color: #77756f;
 
-            color: #697588;
-            font-size: 0.85rem;
-        }
+            border-top: 1px solid #302f2c;
 
-        .footer-content {
             display: flex;
             justify-content: space-between;
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           IMAGE OVERLAY
+        ===================================================== */
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(20, 20, 19, 0.92);
+
+            z-index: 1000;
+
+            display: none;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
+
+            padding: 30px;
+
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: min(1000px, 90vw);
+            max-height: 90vh;
+
+            width: auto;
+            height: auto;
+
+            object-fit: contain;
+        }
+
+        .close {
+            position: absolute;
+
+            top: 25px;
+            right: 30px;
+
+            color: white;
+
+            font-size: 25px;
+
+            cursor: pointer;
         }
 
 
-        /* ================================
+        /* =====================================================
            RESPONSIVE
-        ================================= */
+        ===================================================== */
 
-        @media (max-width: 850px) {
+        @media (max-width: 800px) {
 
-            .features {
-                grid-template-columns: 1fr;
+            .nav {
+                padding: 18px 20px;
             }
 
-            .workflow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .nav-links {
-                display: none;
-            }
-        }
-
-        @media (max-width: 550px) {
-
-            section {
-                padding: 70px 0;
-            }
-
-            h1 {
-                letter-spacing: -3px;
-            }
-
-            .workflow {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
+            .nav-right {
+                gap: 14px;
             }
 
             .hero {
-                padding: 70px 0;
+                min-height: 80vh;
+
+                padding:
+                    130px
+                    20px
+                    80px;
+            }
+
+            .collection-header {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .collection {
+                padding:
+                    35px
+                    20px
+                    80px;
+
+                columns: 2 160px;
+
+                column-gap: 10px;
+            }
+
+            .item {
+                margin-bottom: 10px;
+            }
+
+            .item-info {
+                padding-bottom: 10px;
+            }
+
+            .about {
+                padding: 90px 25px;
+
+                grid-template-columns: 1fr;
+
+                gap: 60px;
+            }
+
+            footer {
+                padding: 22px 20px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .name {
+                font-size: 13px;
+            }
+
+            .nav-right a:nth-child(2) {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .collection {
+                columns: 1;
+            }
+
+            .collection-title {
+                font-size: 25px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 8px;
             }
         }
     </style>
 </head>
 
+
 <body>
 
-    <!-- ================================
+
+    <!-- =====================================================
          NAVIGATION
-    ================================= -->
+    ====================================================== -->
 
-    <header>
-        <div class="container">
-            <nav>
+    <nav class="nav">
 
-                <a href="#" class="logo">
-                    <span class="logo-mark">&lt;/&gt;</span>
-                    DevForge
-                </a>
+        <!-- CHANGE YOUR NAME HERE -->
+        <a href="#" class="name">
+            YOUR NAME
+        </a>
 
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#workflow">Workflow</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+        <div class="nav-right">
 
-            </nav>
+            <a href="#collection">
+                Collection
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <!-- CHANGE THIS TO YOUR GITHUB -->
+            <a href="https://github.com/" target="_blank">
+                GitHub ↗
+            </a>
+
         </div>
-    </header>
+
+    </nav>
 
 
-    <!-- ================================
+    <!-- =====================================================
          HERO
-    ================================= -->
+    ====================================================== -->
 
     <main>
 
         <section class="hero">
 
-            <div class="container">
+            <div class="hero-inner">
 
-                <div class="hero-content">
+                <div class="eyebrow">
+                    Personal archive / 2026
+                </div>
 
-                    <div class="badge">
-                        <span class="status-dot"></span>
-                        GitHub Pages Ready
-                    </div>
+                <h1>
+                    Things<br>
+                    I find <em>interesting.</em>
+                </h1>
 
-                    <h1>
-                        Build.
-                        <span class="gradient-text">
-                            Commit.
+                <p class="intro">
+                    A small corner of the internet where I collect
+                    images, ideas, places, objects and things that
+                    make me stop scrolling.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COLLECTION
+        ================================================== -->
+
+        <section id="collection">
+
+            <div class="collection-header">
+
+                <h2 class="collection-title">
+                    Selected things
+                </h2>
+
+                <span class="collection-count">
+                    08 pieces
+                </span>
+
+            </div>
+
+
+            <div class="collection">
+
+
+                <!-- ITEM 01 -->
+
+                <article class="item portrait">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80"
+                        alt="Architecture"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Architecture
                         </span>
-                        Ship.
-                    </h1>
 
-                    <p class="hero-description">
-                        A clean, responsive single-page frontend built
-                        with nothing but HTML, CSS and JavaScript.
-                        No frameworks. No dependencies. Just code.
-                    </p>
-
-                    <div class="hero-buttons">
-
-                        <a href="#features"
-                           class="btn btn-primary">
-                            Explore Project →
-                        </a>
-
-                        <a href="#workflow"
-                           class="btn btn-secondary">
-                            View Workflow
-                        </a>
+                        <span>
+                            01
+                        </span>
 
                     </div>
 
-                </div>
+                </article>
+
+
+                <!-- ITEM 02 -->
+
+                <article class="item landscape">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80"
+                        alt="Interior"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Quiet spaces
+                        </span>
+
+                        <span>
+                            02
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ITEM 03 -->
+
+                <article class="item square">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1526481280695-3c687fd5432c?auto=format&fit=crop&w=900&q=80"
+                        alt="Japan"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Tokyo
+                        </span>
+
+                        <span>
+                            03
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ITEM 04 -->
+
+                <article class="item portrait">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=900&q=80"
+                        alt="Mountain landscape"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Mountains
+                        </span>
+
+                        <span>
+                            04
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ITEM 05 -->
+
+                <article class="item wide">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+                        alt="Workspace"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Workspace
+                        </span>
+
+                        <span>
+                            05
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ITEM 06 -->
+
+                <article class="item square">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80"
+                        alt="Landscape"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Outside
+                        </span>
+
+                        <span>
+                            06
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ITEM 07 -->
+
+                <article class="item portrait">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=900&q=80"
+                        alt="Modern building"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Form
+                        </span>
+
+                        <span>
+                            07
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <!-- ITEM 08 -->
+
+                <article class="item landscape">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=900&q=80"
+                        alt="Forest"
+                        loading="lazy"
+                        onclick="openImage(this)"
+                    >
+
+                    <div class="item-info">
+
+                        <span class="item-name">
+                            Forest
+                        </span>
+
+                        <span>
+                            08
+                        </span>
+
+                    </div>
+
+                </article>
+
 
             </div>
 
         </section>
 
 
-        <!-- ================================
-             FEATURES
-        ================================= -->
+        <!-- =================================================
+             ABOUT
+        ================================================== -->
 
-        <section id="features">
+        <section class="about" id="about">
 
-            <div class="container">
+            <div>
 
-                <div class="section-heading">
-                    <span>Core Stack</span>
-
-                    <h2>Simple technologies. Serious results.</h2>
-
-                    <p>
-                        Everything needed for this project lives inside
-                        a single HTML document.
-                    </p>
+                <div class="about-label">
+                    About
                 </div>
 
-
-                <div class="features">
-
-                    <article class="card">
-
-                        <div class="card-icon">
-                            &lt;/&gt;
-                        </div>
-
-                        <h3>Semantic HTML</h3>
-
-                        <p>
-                            Structured markup using semantic elements
-                            such as header, main, section, article
-                            and footer.
-                        </p>
-
-                    </article>
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-                            #
-                        </div>
-
-                        <h3>Modern CSS</h3>
-
-                        <p>
-                            Responsive layouts, gradients, glass
-                            effects, animations and CSS Grid without
-                            external frameworks.
-                        </p>
-
-                    </article>
-
-
-                    <article class="card">
-
-                        <div class="card-icon">
-                            JS
-                        </div>
-
-                        <h3>Vanilla JavaScript</h3>
-
-                        <p>
-                            Lightweight interaction without React,
-                            Vue, Angular or any external JavaScript
-                            library.
-                        </p>
-
-                    </article>
-
-                </div>
+                <h2>
+                    I'm<br>
+                    <em>curious.</em>
+                </h2>
 
             </div>
 
-        </section>
+
+            <div>
+
+                <p class="about-text">
+
+                    I'm YOUR NAME, a developer interested in
+                    technology, design, photography, architecture,
+                    music and the strange little details that make
+                    things beautiful.
+
+                    <br><br>
+
+                    This website is simply a collection of things
+                    I've found along the way.
+
+                </p>
 
 
-        <!-- ================================
-             TERMINAL
-        ================================= -->
+                <div class="about-links">
 
-        <section class="terminal-section" id="about">
+                    <!-- CHANGE THESE LINKS -->
 
-            <div class="container">
+                    <a
+                        href="https://github.com/"
+                        target="_blank"
+                    >
+                        GitHub ↗
+                    </a>
 
-                <div class="section-heading">
-                    <span>The Process</span>
+                    <a
+                        href="#"
+                        target="_blank"
+                    >
+                        Instagram ↗
+                    </a>
 
-                    <h2>From local machine to the web.</h2>
-
-                    <p>
-                        The entire project can be version controlled
-                        and deployed using GitHub.
-                    </p>
-                </div>
-
-
-                <div class="terminal">
-
-                    <div class="terminal-bar">
-
-                        <div class="terminal-dots">
-                            <span class="red"></span>
-                            <span class="yellow"></span>
-                            <span class="green"></span>
-                        </div>
-
-                        <div class="terminal-title">
-                            ~/devforge
-                        </div>
-
-                    </div>
-
-
-                    <pre><span class="comment"># Create your project</span>
-<span class="command">$</span> mkdir devforge
-<span class="command">$</span> cd devforge
-
-<span class="comment"># Create the webpage</span>
-<span class="command">$</span> touch index.html
-
-<span class="comment"># Initialize Git</span>
-<span class="command">$</span> git init
-
-<span class="comment"># Save your work</span>
-<span class="command">$</span> git add .
-<span class="command">$</span> git commit -m <span class="success">"Initial commit"</span>
-
-<span class="comment"># Push to GitHub</span>
-<span class="command">$</span> git branch -M main
-<span class="command">$</span> git remote add origin YOUR_REPOSITORY_URL
-<span class="command">$</span> git push -u origin main
-
-<span class="success">✓ Your code is now on GitHub.</span></pre>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             WORKFLOW
-        ================================= -->
-
-        <section id="workflow">
-
-            <div class="container">
-
-                <div class="section-heading">
-                    <span>Git Workflow</span>
-
-                    <h2>Four commands. Real version control.</h2>
-
-                    <p>
-                        A tiny workflow that teaches the foundation
-                        of professional source control.
-                    </p>
-                </div>
-
-
-                <div class="workflow">
-
-                    <div class="step">
-                        <div class="step-number">01 / INIT</div>
-
-                        <h3>Initialize</h3>
-
-                        <p>
-                            Turn your project directory into a Git
-                            repository.
-                        </p>
-                    </div>
-
-
-                    <div class="step">
-                        <div class="step-number">02 / ADD</div>
-
-                        <h3>Stage</h3>
-
-                        <p>
-                            Tell Git which changes should become
-                            part of the next snapshot.
-                        </p>
-                    </div>
-
-
-                    <div class="step">
-                        <div class="step-number">03 / COMMIT</div>
-
-                        <h3>Commit</h3>
-
-                        <p>
-                            Create a permanent versioned snapshot
-                            with a meaningful message.
-                        </p>
-                    </div>
-
-
-                    <div class="step">
-                        <div class="step-number">04 / PUSH</div>
-
-                        <h3>Publish</h3>
-
-                        <p>
-                            Push your commits to GitHub and make
-                            the project available online.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================================
-             CTA
-        ================================= -->
-
-        <section id="contact">
-
-            <div class="container">
-
-                <div class="cta">
-
-                    <h2>
-                        Now make it yours.
-                    </h2>
-
-                    <p>
-                        Fork the idea. Change the colors. Rewrite
-                        the content. Break it. Fix it. Commit it.
-                        That's how you learn.
-                    </p>
-
-                    <a href="#"
-                       class="btn btn-primary"
-                       onclick="showMessage(event)">
-                        Launch Project →
+                    <a
+                        href="mailto:hello@example.com"
+                    >
+                        Email ↗
                     </a>
 
                 </div>
@@ -962,52 +872,109 @@
     </main>
 
 
-    <!-- ================================
+    <!-- =====================================================
          FOOTER
-    ================================= -->
+    ====================================================== -->
 
     <footer>
 
-        <div class="container">
+        <span>
+            © <span id="year"></span> YOUR NAME
+        </span>
 
-            <div class="footer-content">
-
-                <p>
-                    © <span id="year"></span> DevForge.
-                    Built for learning.
-                </p>
-
-                <p>
-                    HTML · CSS · JavaScript · Git · GitHub
-                </p>
-
-            </div>
-
-        </div>
+        <span>
+            Made on the internet.
+        </span>
 
     </footer>
 
 
-    <!-- ================================
+    <!-- =====================================================
+         IMAGE LIGHTBOX
+    ====================================================== -->
+
+    <div
+        class="lightbox"
+        id="lightbox"
+        onclick="closeImage()"
+    >
+
+        <span class="close">
+            ×
+        </span>
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt=""
+        >
+
+    </div>
+
+
+    <!-- =====================================================
          JAVASCRIPT
-    ================================= -->
+    ====================================================== -->
 
     <script>
 
-        // Automatically update copyright year
+        /*
+         * Automatically updates the copyright year.
+         */
+
         document.getElementById("year").textContent =
             new Date().getFullYear();
 
 
-        // Small interaction for the CTA button
-        function showMessage(event) {
+        /*
+         * Open an image.
+         */
 
-            event.preventDefault();
+        function openImage(image) {
 
-            alert(
-                "Project ready! Replace this button with your GitHub repository link."
-            );
+            const lightbox =
+                document.getElementById("lightbox");
+
+            const lightboxImage =
+                document.getElementById("lightboxImage");
+
+            lightboxImage.src = image.src;
+
+            lightbox.classList.add("active");
+
+            document.body.style.overflow = "hidden";
         }
+
+
+        /*
+         * Close the image.
+         */
+
+        function closeImage() {
+
+            const lightbox =
+                document.getElementById("lightbox");
+
+            lightbox.classList.remove("active");
+
+            document.body.style.overflow = "";
+        }
+
+
+        /*
+         * ESC closes the image.
+         */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+                    closeImage();
+                }
+
+            }
+        );
 
     </script>
 
